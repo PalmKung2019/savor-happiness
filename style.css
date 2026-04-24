@@ -1,0 +1,1768 @@
+/* ==================================================
+   1. VARIABLES & FONTS (ตั้งค่าสีและฟอนต์หลัก)
+================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap');
+
+:root {
+    /* --- Dark Theme (หน้า Collection) --- */
+    --bg-main: #161616;
+    --bg-secondary: #1f1f1f;
+    --bg-card: #252525;
+    --bg-input: #2e2e2e;
+
+    /* สีเขียวตามภาพที่ให้มา */
+    --accent-color: #74C34D;
+    --accent-hover: #5ba139;
+
+    /* ตัวหนังสือโทนขาว-เขียวอ่อน */
+    --text-main: #f0fdf4;
+    --text-muted: #a3e6b4;
+
+    --border-color: #383838;
+    --income-color: #74C34D;
+    --cost-color: #D04539;
+
+    --hero-bg: radial-gradient(circle at center, #213317 0%, #161616 100%);
+    --shadow-light: rgba(0, 0, 0, 0.3);
+    --shadow-dark: rgba(0, 0, 0, 0.5);
+    --shadow-heavy: rgba(0, 0, 0, 0.8);
+    --modal-overlay: rgba(22, 22, 22, 0.95);
+    --caption-em-bg: #1a2e1d;
+    --list-hover-bg: #1e2b20;
+    --step-li-bg: rgba(116, 195, 77, 0.1);
+}
+
+body.light-theme {
+    /* --- Light Theme (หน้า Index) --- */
+    --bg-main: #EBEBEB;
+    --bg-secondary: #ffffff;
+    --bg-card: #ffffff;
+    --bg-input: #f2f7f4;
+
+    /* สีเขียวตามภาพที่ให้มา (ใช้กับปุ่มและไฮไลต์) */
+    --accent-color: #74C34D;
+    --accent-hover: #5ba139;
+
+    /* ตัวหนังสือดึงจากโทนสีเขียวของคุณ แต่ทำให้เข้มจัดเพื่อให้อ่านออกชัดเจน */
+    --text-main: #1A3011;
+    --text-muted: #487A2F;
+
+    --border-color: #d5e0d8;
+    --income-color: #74C34D;
+    --cost-color: #D04539;
+
+    --hero-bg: radial-gradient(circle at center, #ffffff 0%, #e6efe8 100%);
+    --shadow-light: rgba(116, 195, 77, 0.15);
+    --shadow-dark: rgba(116, 195, 77, 0.25);
+    --shadow-heavy: rgba(0, 0, 0, 0.15);
+    --modal-overlay: rgba(235, 235, 235, 0.9);
+    --caption-em-bg: #e4f0e7;
+    --list-hover-bg: #eff6f1;
+    --step-li-bg: rgba(116, 195, 77, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Prompt', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ==================================================
+   2. LAYOUT & TYPOGRAPHY (โครงสร้างและตัวหนังสือ)
+================================================== */
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+h1,
+h2,
+h3 {
+    margin-top: 0;
+    font-weight: 600;
+}
+
+h1 {
+    text-align: center;
+    color: var(--accent-color);
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px var(--shadow-light);
+}
+
+.highlight {
+    color: var(--accent-color);
+}
+
+/* ==================================================
+   3. HOME PAGE (หน้าหลัก)
+================================================== */
+.navbar {
+    background: var(--bg-secondary);
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid var(--border-color);
+    box-shadow: 0 4px 15px var(--shadow-light);
+}
+
+.navbar .logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent-color);
+    letter-spacing: 3px;
+}
+
+.hero-section {
+    text-align: center;
+    padding: 100px 20px;
+    background: var(--hero-bg);
+    position: relative;
+}
+
+.hero-content h1 {
+    font-size: clamp(36px, 5vw, 54px);
+    margin-bottom: 15px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 650px;
+    margin: 0 auto 40px auto;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: var(--accent-color);
+    color: #000;
+    padding: 15px 35px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 6px 15px rgba(243, 156, 18, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(243, 156, 18, 0.5);
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 60px 20px;
+    flex-wrap: wrap;
+}
+
+.feature-box {
+    background: var(--bg-card);
+    padding: 30px 20px;
+    border-radius: 15px;
+    width: 320px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 20px var(--shadow-dark);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.feature-box:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+}
+
+.feature-box h3 {
+    color: var(--accent-color);
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.feature-box p {
+    color: var(--text-muted);
+    font-size: 16px;
+    margin: 0;
+}
+
+/* ==================================================
+   3. NAVBAR & HEADER (แถบเมนูด้านบน)
+================================================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-secondary);
+    padding: 15px 40px;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px var(--shadow-light);
+    position: sticky;
+    /* ให้แถบเมนูติดขอบจอบนเสมอ */
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .logo img {
+    height: 50px;
+    /* 👈 ปรับความสูงโลโก้ตรงนี้ได้เลย (แนะนำ 40px - 60px) */
+    width: auto;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.navbar .logo img:hover {
+    transform: scale(1.05);
+    /* ชี้แล้วโลโก้ขยายขึ้นนิดนึงเพิ่มลูกเล่น */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 16px;
+    font-weight: 600;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-links li a:hover {
+    color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+/* ซ่อนปุ่ม "กลับหน้าหลัก" แบบเก่าเพราะเรามี Navbar แล้ว */
+.btn-back {
+    display: none !important;
+}
+
+/* Responsive สำหรับมือถือ */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+
+    .nav-links {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* ==================================================
+   4. COLLECTION PAGE (หน้าคลังการ์ด)
+================================================== */
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    color: var(--accent-color);
+    text-decoration: none;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: color 0.2s ease;
+}
+
+.btn-back:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+.filter-controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 6px 15px var(--shadow-light);
+}
+
+.filter-controls input,
+.filter-controls select {
+    padding: 12px 15px;
+    font-size: 15px;
+    font-family: inherit;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    flex: 1;
+    min-width: 200px;
+    background: var(--bg-input);
+    color: var(--text-main);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.filter-controls input:focus,
+.filter-controls select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 8px rgba(243, 156, 18, 0.4);
+}
+
+.filter-controls input::placeholder {
+    color: var(--text-muted);
+}
+
+.size-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex: 1;
+    min-width: 200px;
+    justify-content: flex-end;
+}
+
+.size-controls button {
+    padding: 12px 20px;
+    background: var(--bg-input);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.size-controls button:hover {
+    background: var(--bg-main);
+    color: var(--text-main);
+}
+
+.size-controls button.active {
+    background: var(--accent-color);
+    color: #000;
+    border-color: var(--accent-color);
+    font-weight: 700;
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.3);
+}
+
+/* ==================================================
+   5. CARD GRID SYSTEM (ระบบกริดแสดงการ์ด)
+================================================== */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    justify-items: center;
+    transition: all 0.4s ease;
+}
+
+.card-grid.small-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+}
+
+.card-image-wrapper {
+    position: relative;
+    cursor: pointer;
+    border-radius: 12px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeInSlideUp 0.4s ease forwards;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-image-wrapper img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px var(--shadow-dark);
+    display: block;
+    border: 1px solid var(--border-color);
+    transition: box-shadow 0.1s ease, transform 0.1s ease, border-color 0.3s ease;
+    will-change: transform, box-shadow;
+}
+
+.card-grid.small-grid .card-image-wrapper img {
+    max-width: 200px;
+}
+
+.card-image-wrapper:hover {
+    transform: none;
+    z-index: 10;
+}
+
+/* ==================================================
+   6. POP-UP MODAL (หน้าต่างซูมรูป)
+================================================== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    padding-top: 40px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modal-overlay);
+    backdrop-filter: blur(8px);
+    overflow-y: auto;
+}
+
+.modal-content {
+    margin: 0 auto;
+    display: block;
+    max-width: 90%;
+    max-height: 70vh;
+    border-radius: 15px;
+    box-shadow: 0 0 40px var(--shadow-heavy);
+    border: 2px solid var(--border-color);
+    animation: luxuriousZoomIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes luxuriousZoomIn {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+#caption {
+    margin: 20px auto;
+    display: block;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    color: var(--text-main);
+    padding: 20px;
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#caption strong {
+    font-size: 24px;
+    color: var(--accent-color);
+    display: block;
+    margin-bottom: 10px;
+}
+
+#caption em {
+    display: inline-block;
+    background: var(--caption-em-bg);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 10px 0;
+    font-style: normal;
+    border: 1px solid var(--border-color);
+}
+
+#caption small {
+    display: block;
+    font-size: 16px;
+    margin-top: 5px;
+    font-weight: 600;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: var(--text-main);
+    font-size: 28px;
+    cursor: pointer;
+    transition: color 0.2s, transform 0.2s;
+    background: var(--bg-card);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+}
+
+.close-btn:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--shadow-dark);
+    color: white;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-btn:hover {
+    background: rgba(243, 156, 18, 0.8);
+    color: #000;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn {
+    left: 30px;
+}
+
+.next-btn {
+    right: 30px;
+}
+
+.flip-next {
+    animation: luxuriousFlipNext 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+
+@keyframes luxuriousFlipNext {
+    0% {
+        transform: scale(0.9) rotateY(0deg);
+        opacity: 0;
+    }
+
+    30% {
+        transform: scale(1) rotateY(15deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1) rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+.flip-prev {
+    animation: luxuriousFlipPrev 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+
+@keyframes luxuriousFlipPrev {
+    0% {
+        transform: scale(0.9) rotateY(0deg);
+        opacity: 0;
+    }
+
+    30% {
+        transform: scale(1) rotateY(-15deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1) rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+/* ==================================================
+   7. HOW TO PLAY PAGE (หน้าวิธีเล่น)
+================================================== */
+.btn-secondary {
+    display: inline-block;
+    background: transparent;
+    color: var(--accent-color);
+    padding: 13px 33px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;
+    border: 2px solid var(--accent-color);
+    transition: all 0.3s ease;
+    margin-left: 15px;
+}
+
+.btn-secondary:hover {
+    background: rgba(243, 156, 18, 0.1);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(243, 156, 18, 0.2);
+}
+
+.rules-section {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 30px;
+    box-shadow: 0 8px 20px var(--shadow-dark);
+    animation: fadeInSlideUp 0.5s ease forwards;
+}
+
+.rules-section h2 {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.goal-section p {
+    font-size: 18px;
+    color: var(--text-muted);
+    line-height: 1.8;
+}
+
+.goal-section strong {
+    color: var(--text-main);
+    font-size: 110%;
+}
+
+.step-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.step-box {
+    display: flex;
+    align-items: flex-start;
+    background: var(--bg-input);
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 5px solid var(--accent-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.step-box:hover {
+    transform: translateX(10px);
+    box-shadow: 0 5px 15px var(--shadow-light);
+}
+
+.step-number {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--accent-color);
+    margin-right: 25px;
+    min-width: 40px;
+    text-align: center;
+    line-height: 1;
+    text-shadow: 0 2px 5px var(--shadow-light);
+}
+
+.step-content h3 {
+    margin: 0 0 10px 0;
+    color: var(--text-main);
+    font-size: 22px;
+}
+
+.step-content p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 16px;
+}
+
+.step-content ul {
+    padding-left: 0;
+    margin-top: 15px;
+    list-style: none;
+}
+
+.step-content li {
+    margin-bottom: 10px;
+    color: var(--text-muted);
+    background: var(--step-li-bg);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.step-content li i {
+    color: var(--accent-color);
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* ==================================================
+   8. VIEW MODES (Grid, Hybrid, List)
+================================================== */
+.view-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+}
+
+.view-controls button {
+    width: 45px;
+    height: 45px;
+    background: var(--bg-input);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 18px;
+}
+
+.view-controls button.active {
+    background: var(--accent-color);
+    color: #000;
+    border-color: var(--accent-color);
+}
+
+.card-grid.hybrid-view {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.hybrid-card {
+    display: flex;
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.hybrid-card:hover {
+    border-color: var(--accent-color);
+    transform: translateX(5px);
+}
+
+.hybrid-card img {
+    width: 120px;
+    height: auto;
+    object-fit: cover;
+}
+
+.hybrid-info {
+    padding: 15px;
+    flex: 1;
+}
+
+.card-grid.list-view {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.list-item {
+    display: grid;
+    grid-template-columns: 60px 1.5fr 1fr 1fr 1fr 2fr;
+    align-items: center;
+    background: var(--bg-card);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    gap: 15px;
+    transition: 0.2s;
+}
+
+.list-item:hover {
+    background: var(--list-hover-bg);
+    border-color: var(--accent-color);
+}
+
+.list-item img {
+    width: 40px;
+    border-radius: 4px;
+}
+
+.list-item .cost-tag {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.list-item .income-tag {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.view-controls .divider {
+    width: 1px;
+    height: 25px;
+    background: var(--border-color);
+    margin: 0 5px;
+}
+
+.sub-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.sub-controls button {
+    width: 35px !important;
+    height: 35px !important;
+    font-size: 14px !important;
+}
+
+.view-controls:not(.is-grid) #gridSubControls {
+    display: none;
+}
+
+.card-grid.grid-view.columns-6 {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+}
+
+.card-grid.grid-view.columns-6 .card-image-wrapper img {
+    max-width: 180px;
+}
+
+/* ==================================================
+   9. RESPONSIVE DESIGN
+================================================== */
+@media (max-width: 992px) {
+
+    .card-grid,
+    .card-grid.small-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
+    }
+
+    .filter-controls {
+        flex-direction: column;
+    }
+
+    .size-controls {
+        justify-content: space-between;
+    }
+
+    .card-grid.hybrid-view {
+        grid-template-columns: 1fr;
+    }
+
+    .list-item {
+        grid-template-columns: 50px 1fr 1fr;
+    }
+
+    .list-item .hide-mobile {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+
+    .prev-btn {
+        left: 10px;
+    }
+
+    .next-btn {
+        right: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-content h1 {
+        font-size: 32px;
+    }
+
+    .card-grid,
+    .card-grid.small-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modal-content {
+        max-height: 60vh;
+    }
+
+    .close-btn {
+        top: 10px;
+        right: 15px;
+    }
+
+    .btn-secondary {
+        margin-left: 0;
+        margin-top: 15px;
+    }
+
+    .hero-content a {
+        display: block;
+        width: 100%;
+        max-width: 300px;
+        margin: 10px auto;
+    }
+
+    .step-box {
+        flex-direction: column;
+    }
+
+    .step-number {
+        margin-bottom: 15px;
+    }
+}
+
+.swiper-container {
+    width: 100%;
+
+    aspect-ratio: 1920 / 800;
+    max-height: 800px;
+    position: relative;
+    overflow: hidden;
+}
+
+.swiper-slide {
+    display: flex;
+    position: relative;
+
+    background-color: var(--bg-main);
+}
+
+.swiper-slide>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+
+.slide-content {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    justify-content: flex-start;
+
+    padding-left: 12%;
+
+}
+
+
+.slide-info-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    max-width: 550px;
+
+}
+
+/* สไตล์รูปโลโก้ */
+.slide-logo {
+    width: 350px;
+
+    height: auto;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 10;
+    display: block;
+}
+
+
+.slide-info-block h1 {
+    color: white;
+    margin: 0 0 10px 0;
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 42px);
+
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+    text-align: center;
+
+    line-height: 1.2;
+}
+
+.slide-info-block p {
+    color: white;
+    margin: 0;
+    font-weight: 600;
+    font-size: 18px;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.9);
+    text-align: center;
+
+    letter-spacing: 0.5px;
+}
+
+.slide-cta {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+}
+
+
+.btn-cta-green {
+    background-color: #4a8c1f;
+
+    color: #ffffff !important;
+    border: 2px solid #ffffff;
+
+    padding: 12px 35px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 6px;
+
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-cta-green:hover {
+    background-color: #3b7019;
+
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+}
+
+
+.btn-cta-white {
+    background-color: #ffffff;
+    color: #222222 !important;
+    border: 2px solid #ffffff;
+
+    padding: 12px 35px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-cta-white:hover {
+    background-color: #e0e0e0;
+
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+}
+
+
+.swiper-pagination-bullet {
+    background: white;
+    opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--accent-color);
+
+    opacity: 1;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: white;
+    background: rgba(0, 0, 0, 0.3);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    &::after {
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+
+
+@media (max-width: 992px) {
+    .slide-content {
+        padding-left: 5%;
+    }
+
+    .slide-info-block {
+        max-width: 70%;
+    }
+
+    .slide-logo {
+        width: 140px;
+    }
+}
+
+@media (max-width: 576px) {
+    .slide-content {
+        padding-left: 0;
+        justify-content: center;
+
+        align-items: flex-end;
+
+        padding-bottom: 50px;
+    }
+
+    .slide-info-block {
+        align-items: center;
+        max-width: 90%;
+    }
+
+    .slide-logo {
+        width: 100px;
+        margin-bottom: 15px;
+    }
+
+    .slide-info-block h1 {
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .slide-info-block p {
+        text-align: center;
+        font-size: 16px;
+    }
+}
+
+.product-banner {
+    position: relative;
+    background-image: url("4x/Asset 15@4x.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 80px 20px;
+    margin-bottom: 40px;
+
+}
+
+
+.product-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 15, 15, 0.85);
+
+    z-index: 1;
+}
+
+.product-container {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    max-width: 1100px;
+
+    margin: 0 auto;
+    align-items: center;
+
+    justify-content: center;
+    gap: 60px;
+
+}
+
+.product-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.product-image img {
+    max-width: 100%;
+    height: auto;
+    width: 600px;
+
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.8));
+
+}
+
+.product-info {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.product-info h2 {
+    color: #ffffff;
+    font-size: clamp(28px, 4vw, 36px);
+    font-weight: 800;
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    letter-spacing: 1px;
+}
+
+.product-info p {
+    color: #dddddd;
+
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 0 0 30px 0;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+
+.btn-orange {
+    background: linear-gradient(to bottom, #52c248, #43a137);
+
+    color: #ffffff !important;
+    padding: 14px 40px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;
+   
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 6px 15px rgba(0, 107, 27, 0.4);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-orange:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 136, 7, 0.6);
+    background: linear-gradient(to bottom, #00791a, #166d00);
+}
+
+
+@media (max-width: 768px) {
+    .product-container {
+        flex-direction: column;
+        /* จับเรียงบน-ล่างแทนซ้าย-ขวา */
+        text-align: center;
+        gap: 30px;
+    }
+
+    .product-image {
+        justify-content: center;
+    }
+
+    .product-info {
+        align-items: center;
+        text-align: center;
+    }
+}
+
+.list-item .cost-tag {
+    color: var(--cost-color);
+    font-weight: 600;
+}
+
+.list-item .income-tag {
+    color: var(--income-color);
+    font-weight: 600;
+}
+
+
+
+.latest-news {
+    padding: 60px 20px 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+.news-header {
+    margin-bottom: 30px;
+}
+
+.news-header h2 {
+    text-align: center;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--text-main);
+    margin: 0 0 20px 0;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+
+.view-all-link {
+    display: inline-block;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.view-all-link:hover {
+    color: var(--accent-color);
+}
+
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 20px;
+}
+
+
+.news-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #111111; 
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+
+.news-image-wrapper {
+    position: relative;
+    height: 220px; 
+    width: 100%;
+}
+
+.news-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.news-badge {
+    position: absolute;
+    bottom: 0; 
+    left: 20px;
+    transform: translateY(50%); 
+    background-color: var(--cost-color); 
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 6px 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 2;
+    border-radius: 2px;
+}
+
+.news-content {
+    padding: 35px 25px 25px 25px; 
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.news-content h3 {
+    color: #ffffff; 
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    line-height: 1.4;
+}
+
+.news-content p {
+    color: #cccccc; 
+    font-size: 15px;
+    margin: 0;
+    line-height: 1.6;
+}
+
+
+@media (max-width: 992px) {
+    .news-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .news-grid { grid-template-columns: 1fr; gap: 20px; }
+}
+
+
+.news-header-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+.news-header-img {
+    max-width: 250px;
+    height: auto;
+    margin-bottom: 10px; 
+}
+
+.vw-footer {
+    background-color: #111111;
+    color: #e0e0e0;
+    padding: 60px 20px 20px;
+    font-family: 'Prompt', sans-serif;
+    border-top: 4px solid var(--accent-color);
+    margin-top: 60px;
+    box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.vw-footer a {
+    color: #a3a3a3;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.vw-footer a:hover {
+    color: var(--accent-color);
+}
+
+.footer-top {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    border-bottom: 1px solid #2a2a2a;
+    padding-bottom: 40px;
+}
+
+.footer-logo-social {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-logo {
+    width: 200px;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+}
+
+.footer-tagline {
+    font-size: 15px;
+    color: #888;
+    margin: 0 0 20px 0;
+    font-style: italic;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #222;
+    border-radius: 8px;
+    font-size: 18px;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #000;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(116, 195, 77, 0.4);
+}
+
+.footer-links {
+    flex: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 60px;
+}
+
+.footer-column {
+    min-width: 150px;
+}
+
+.footer-column h4 {
+    color: #ffffff;
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+/* เส้นขีดเส้นใต้หัวข้อเล็กๆ */
+.footer-column h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+    font-size: 15px;
+    display: inline-block;
+}
+
+.footer-column ul li a:hover {
+    transform: translateX(5px); 
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 20px auto 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-legal {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-legal a {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-legal .separator {
+    color: #444;
+    font-size: 12px;
+}
+
+.footer-bottom p {
+    font-size: 13px;
+    color: #666;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 992px) {
+    .footer-links {
+        justify-content: space-between;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .vw-footer {
+        padding: 40px 20px 20px;
+    }
+
+    .footer-top {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-logo-social {
+        align-items: center;
+    }
+
+    .footer-column h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footer-links {
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        gap: 40px;
+    }
+
+    .footer-column ul li a:hover {
+        transform: none;
+    }
+}
+
+.vw-modal {
+    display: none; 
+    position: fixed; 
+    z-index: 9999; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px); /* เบลอพื้นหลังให้ดูหรู */
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    margin: auto;
+    padding: 40px;
+    border: 2px solid var(--accent-color);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 0 30px rgba(116, 195, 77, 0.2);
+    animation: modalAppear 0.4s ease-out;
+}
+
+@keyframes modalAppear {
+    from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.close-modal {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    color: #888;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: var(--accent-color);
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.modal-logo {
+    width: 120px;
+    margin-bottom: 15px;
+}
+
+.modal-header h2 {
+    color: var(--accent-color);
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.modal-header p {
+    color: #aaa;
+    font-size: 14px;
+}
+
+.modal-form .form-group {
+    margin-bottom: 20px;
+}
+
+.modal-form label {
+    display: block;
+    color: #eee;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.modal-form input {
+    width: 100%;
+    padding: 12px;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: #fff;
+    font-family: 'Prompt', sans-serif;
+}
+
+.modal-form input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--accent-color);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(116, 195, 77, 0.4);
+}
+
+.modal-footer {
+    text-align: center;
+    font-size: 11px;
+    color: #666;
+    margin-top: 20px;
+}

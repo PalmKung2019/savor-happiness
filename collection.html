@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คลังการ์ด - VALUE WAR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="4x/Asset 4@4x.png" alt="VALUE WAR Logo">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fa-solid fa-house"></i> หน้าหลัก</a></li>
+            <li><a href="collection.html"><i class="fa-solid fa-layer-group"></i> คลังการ์ด</a></li>
+            <li><a href="how-to-play.html"><i class="fa-solid fa-book-open"></i> วิธีเล่น</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <a href="index.html" class="btn-back">
+            <i class="fa-solid fa-chevron-left" style="margin-right: 5px;"></i> กลับหน้าหลัก
+        </a>
+
+        <div class="filter-controls">
+            <input type="text" id="searchInput" placeholder="ค้นหาชื่อ หรือ หมวดหมู่...">
+
+            <select id="categoryFilter">
+                <option value="all">หมวดหมู่ (ทั้งหมด)</option>
+                <option value="Service">บริการ (Service)</option>
+                <option value="Manufacturing">การผลิต (Manufacturing)</option>
+                <option value="Trading">การค้า (Trading)</option>
+                <option value="Agriculture">การเกษตร (Agriculture)</option>
+                <option value="Technology">เทคโนโลยี (Technology)</option>
+                <option value="E-commerce">ขายของออนไลน์ (E-commerce)</option>
+                <option value="Connection">คอนเนคชั่น (Connection)</option>
+                <option value="Event">อีเวนต์ (Event)</option>
+            </select>
+
+            <select id="subCategoryFilter">
+                <option value="all">ประเภทย่อย (ทั้งหมด)</option>
+                <option value="HEALTH">สุขภาพ (Health)</option>
+                <option value="FOOD">อาหาร (Food)</option>
+                <option value="LIFESTYLE">ไลฟ์สไตล์ (Lifestyle)</option>
+                <option value="ENTERTAINMENT">บันเทิง (Entertainment)</option>
+                <option value="EDUCATION">การศึกษา (Education)</option>
+                <option value="TECHNOLOGY">เทคโนโลยี (Technology)</option>
+                <option value="LOGISTIC">โลจิสติกส์ (Logistics)</option>
+                <option value="INDUSTRIAL">อุตสาหกรรม (Industrial)</option>
+                <option value="ENVIRONMENT">สิ่งแวดล้อม (Environment)</option>
+                <option value="SMART LIVING">สมาร์ทลีฟวิ่ง (Smart Living)</option>
+                <option value="CONSTRUCTION">ก่อสร้าง (Construction)</option>
+                <option value="FINANCE">การเงิน (Finance)</option>
+                <option value="MARKETING">การตลาด (Marketing)</option>
+                <option value="COMMUNICATION">การสื่อสาร (Communication)</option>
+                <option value="SECURITY">ความปลอดภัย (Security)</option>
+                <option value="SPORTS">กีฬา (Sports)</option>
+            </select>
+
+            <select id="sortOrder">
+                <option value="default">เรียงลำดับปกติ</option>
+                <option value="cost-desc">ราคาซื้อ (Cost) : มาก ➔ น้อย</option>
+                <option value="cost-asc">ราคาซื้อ (Cost) : น้อย ➔ มาก</option>
+                <option value="income-desc">รายได้ (Income) : มาก ➔ น้อย</option>
+                <option value="income-asc">รายได้ (Income) : น้อย ➔ มาก</option>
+            </select>
+
+            <div class="view-controls">
+                <div id="gridSubControls" class="sub-controls">
+                    <button id="btnGrid4" class="active" title="4 ใบต่อแถว">4</button>
+                    <button id="btnGrid6" title="6 ใบต่อแถว">6</button>
+                </div>
+
+                <div class="divider"></div> <button id="btnGrid" class="active" title="ตาราง">
+                    <i class="fa-solid fa-grip"></i>
+                </button>
+                <button id="btnHybrid" title="ไฮบริด">
+                    <i class="fa-solid fa-table-list"></i>
+                </button>
+                <button id="btnList" title="รายการ">
+                    <i class="fa-solid fa-list"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="cardContainer" class="card-grid"></div>
+    </div>
+
+    <div id="imageModal" class="modal">
+        <span class="close-btn" id="closeModal">
+            <i class="fa-solid fa-xmark"></i>
+        </span>
+
+        <button class="nav-btn prev-btn" id="prevCard">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="nav-btn next-btn" id="nextCard">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <img class="modal-content" id="expandedImg">
+        <div id="caption"></div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <footer class="vw-footer">
+        <div class="footer-top">
+            <div class="footer-logo-social">
+                <img src="4x/Asset 4@4x.png" alt="VALUE WAR Logo" class="footer-logo">
+                <p class="footer-tagline">ก้าวสู่การเป็นที่หนึ่งในโลกธุรกิจ</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>เกี่ยวกับเกม</h4>
+                    <ul>
+                        <li><a href="index.html">หน้าหลัก</a></li>
+                        <li><a href="how-to-play.html">วิธีเล่น (Rulebook)</a></li>
+                        <li><a href="collection.html">คลังการ์ดทั้งหมด</a></li>
+                        <li><a href="#">บันทึกนักพัฒนา</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>คอมมูนิตี้</h4>
+                    <ul>
+                        <li><a href="#">Official Discord</a></li>
+                        <li><a href="#">ค้นหากลุ่มผู้เล่น</a></li>
+                        <li><a href="#">ข่าวสารทัวร์นาเมนต์</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>ช่วยเหลือ</h4>
+                    <ul>
+                        <li><a href="#">คำถามที่พบบ่อย (FAQ)</a></li>
+                        <li><a href="#">ติดต่อทีมงาน</a></li>
+                        <li><a href="#">แจ้งปัญหา</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-legal">
+                <a href="#">นโยบายความเป็นส่วนตัว</a>
+                <span class="separator">|</span>
+                <a href="#">ข้อกำหนดการใช้งาน</a>
+                <span class="separator">|</span>
+                <a href="#">การจัดการคุกกี้</a>
+            </div>
+            <p>&copy; 2026 VALUE WAR. A Senior Thesis Project at Sripatum University (SPU). All Rights Reserved.</p>
+        </div>
+    </footer>
+
+<script src="script.js"></script>
+</body>
+</html>
